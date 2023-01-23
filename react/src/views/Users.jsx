@@ -32,7 +32,7 @@ export default function Users() {
     axiosClient.get('/users')
     .then(({data}) => {
       setLoading(false);
-      console.log(data);
+      // console.log(data);
       setUsers(data.data);
     })
     .catch((e)=>{
@@ -68,7 +68,7 @@ export default function Users() {
           }
           {!loading && <tbody>
             {users.map(u=>(
-              <tr>
+              <tr key={u.id}>
                 <td>{u.id}</td>
                 <td>{u.name}</td>
                 <td>{u.email}</td>

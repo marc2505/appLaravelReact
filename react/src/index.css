@@ -250,12 +250,12 @@ header {
     height: 80px;
     padding: 0 2rem;
     background-color: black;
-    color: white;
+    /* color: white; */
 }
 
 nav a {
     margin: 0 2rem;
-    color: white;
+    /* color: white; */
     text-decoration: none;
 }
 
