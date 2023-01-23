@@ -1,9 +1,14 @@
+import { Children } from 'react';
 import {createBrowserRouter, Navigate} from 'react-router-dom';
+import AdminLayout from './components/AdminLayout';
 import DefaultLayout from './components/DefaultLayout';
 import GuestLayout from './components/GuestLayout';
 import Datshboard from './views/Datshboard';
+import Home from './views/Home';
 import Login from './views/Login';
+import LoginAdmin from './views/LoginAdmin';
 import NotFound from './views/NotFound';
+import Profile from './views/Profile';
 import Signup from './views/Signup';
 import UserForm from './views/UserForm';
 import Users from './views/Users';
@@ -40,9 +45,13 @@ const router = createBrowserRouter([
         element: <GuestLayout/>,
         children: [
             {
-                path: '/login',
-                element: <Login/>
+                path: '/',
+                element: <Home/>
             },
+            // {
+            //     path: '/login',
+            //     element: <Login />
+            // },
             {
                 path: '/signup',
                 element: <Signup/>

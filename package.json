@@ -10,5 +10,9 @@
         "lodash": "^4.17.19",
         "postcss": "^8.1.14",
         "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "react-icons": "^4.7.1",
+        "styled-components": "^5.3.6"
     }
 }
