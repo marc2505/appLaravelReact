@@ -10,7 +10,7 @@ export default function Users() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const {setNotification} = useStateContext();
+  const {user, token, notification, setUser, setToken, setNotification} = useStateContext()
 
   useEffect(()=>{
     getUsers();
@@ -43,6 +43,7 @@ export default function Users() {
 
   return (
     <div>
+      <h1>{user.role}</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Users</h1>
         <Link to='/users/new' className='btn-add'>Add new</Link>
