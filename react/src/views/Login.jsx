@@ -4,12 +4,14 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import axiosClient from '../axios-client'
 import { useStateContext } from '../contexts/ContextProvider'
+import { useNavigate } from 'react-router-dom';
+import NavBar from '../components/NavBar'
 
 export default function Login() {
 
     const emailRef = useRef();
     const passwordRef = useRef();
-
+    const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
 
     const {setUser,setToken} = useStateContext();
@@ -26,6 +28,7 @@ export default function Login() {
         .then(({data})=>{
             setUser(data.user)
             setToken(data.token)
+            navigate('/')
         })
         .catch(err=>{
             const response = err.response;
@@ -44,6 +47,8 @@ export default function Login() {
 
     
     return (
+        <>
+        <NavBar />
         <div className='login-signup-form animated fadeInDown'>
             <div className="form">
                 <form onSubmit={onSubmit}>
@@ -66,5 +71,6 @@ export default function Login() {
                 </form>
             </div>
         </div>    
+        </>
     )
 }

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
+import { useEffect } from 'react'
 import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axiosClient from '../axios-client'
 import { useStateContext } from '../contexts/ContextProvider'
 
@@ -9,10 +10,19 @@ export default function LoginAdmin() {
 
     const emailRef = useRef();
     const passwordRef = useRef();
-
+    const navigate = useNavigate();
     const [errors, setErrors] = useState(null);
+    const {user, token, setUser, setToken} = useStateContext();
 
-    const {setUser,setToken} = useStateContext();
+    useEffect(()=>{
+        console.log('token=',token);
+        console.log('role=',user.role)
+        if (token && user.role == "admin") {
+            navigate('/admin/dashboard');
+        } else if (!token || user.role != "admin") {
+            navigate('/admin');
+        }
+    },[])
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -20,12 +30,12 @@ export default function LoginAdmin() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
         }
-        // console.log(payload)
         setErrors(null)
-        axiosClient.post('/login', payload)
+        axiosClient.post('/loginAdmin', payload)
         .then(({data})=>{
             setUser(data.user)
             setToken(data.token)
+            navigate('/admin/dashboard')
         })
         .catch(err=>{
             const response = err.response;

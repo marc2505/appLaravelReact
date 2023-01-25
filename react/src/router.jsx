@@ -1,11 +1,12 @@
-import { Children } from 'react';
+
 import {createBrowserRouter, Navigate} from 'react-router-dom';
 import AdminLayout from './components/AdminLayout';
 import DefaultLayout from './components/DefaultLayout';
 import GuestLayout from './components/GuestLayout';
 import Dashboard from './views/Dashboard';
-import Datshboard from './views/Dashboard';
 import DashboardAdmin from './views/DashboardAdmin';
+import GestionEvents from './views/GestionEvents';
+import GestionUsers from './views/GestionUsers';
 import Home from './views/Home';
 import Login from './views/Login';
 import LoginAdmin from './views/LoginAdmin';
@@ -18,16 +19,16 @@ import Users from './views/Users';
 const router = createBrowserRouter([
     {
         path: '/',
+        element: <Home />
+    },
+    {
+        path: '/home',
+        element: <Home />
+    },
+    {
+        path: '/',
         element: <GuestLayout/>,
         children: [
-            {
-                path: '/',
-                element: <Home />,
-            },
-            {
-                path: '/home',
-                element: <Home />
-            },
             {
                 path: '/login',
                 element: <Login />
@@ -44,11 +45,15 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Navigate to='/users'/>
+                element: <Navigate to='/dashboard' />
             },
             {
                 path: '/dashboard',
                 element: <Dashboard/>
+            },
+            {
+                path: '/profile',
+                element: <Profile />
             },
             {
                 path: '/users',
@@ -73,12 +78,16 @@ const router = createBrowserRouter([
         element: <AdminLayout/>,
         children: [
             {
-                path: '/admin/login',
-                element: <LoginAdmin />
-            },
-            {
                 path: '/admin/dashboard',
                 element: <DashboardAdmin />
+            },
+            {
+                path: '/admin/users',
+                element: <GestionUsers />
+            },
+            {
+                path: '/admin/events',
+                element: <GestionEvents />
             }
         ]
     },

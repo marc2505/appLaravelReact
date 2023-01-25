@@ -21,6 +21,10 @@ body {
     height: 100%;
 }
 
+.responsive_nav {
+    z-index: 2;
+}
+
 input {
     outline: 0;
     background: #ffffff;
