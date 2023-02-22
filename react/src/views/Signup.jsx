@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import axiosClient from '../axios-client';
-import NavBar from '../components/NavBar';
 import { useStateContext } from '../contexts/ContextProvider';
 
 export default function Signup() {
@@ -41,7 +40,6 @@ export default function Signup() {
 
     return (
         <>
-        <NavBar />
         <div className='login-signup-form animated fadeInDown'>
             <div className="form">
                 <form onSubmit={onSubmit}>

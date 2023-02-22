@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginAdminRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use Illuminate\Http\Request;
@@ -53,7 +54,7 @@ class AuthController extends Controller
 
     }
 
-    public function loginAdmin(LoginRequest $request) {
+    public function loginAdmin(LoginAdminRequest $request) {
         $credentials = $request->validated();
         if (!Auth::attempt(($credentials))) {
             return response([

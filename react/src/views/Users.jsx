@@ -46,7 +46,7 @@ export default function Users() {
       <h1>{user.role}</h1>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h1>Users</h1>
-        <Link to='/users/new' className='btn-add'>Add new</Link>
+        <Link to='/new' className='btn-add'>Add new</Link>
       </div>
       <div className="card animated fadeInDown">
         <table>

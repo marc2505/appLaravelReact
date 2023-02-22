@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -32,6 +33,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $data['password'] = bcrypt($data['password']);
+        $data['role'] = $request->input('role');
         $user = User::create($data);
         return response(new UserResource($user), 201);
     }
@@ -60,6 +62,7 @@ class UserController extends Controller
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         }
+        $data['role'] = $request->input('role');
         $user->update($data);
         return new UserResource($user);
     }
@@ -76,4 +79,9 @@ class UserController extends Controller
 
         return response('', 204);
     }
+
+    // public function getName(Request $request) {
+    //     dd($request->query());
+    //     return response($request->query(), 201);
+    // }
 }

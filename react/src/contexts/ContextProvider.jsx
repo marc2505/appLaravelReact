@@ -13,7 +13,9 @@ const StateContext = createContext({
 
 export const ContextProvider = ({children}) => {
 
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
+    // const [user, _setUser] = useState(JSON.parse(localStorage.getItem('USER')));
+    const [user, _setUser] = useState(localStorage.getItem('USER'));
     const [notification, _setNotification] = useState('');
     const [token, _setToken] = useState(localStorage.getItem('ACCESS_TOKEN'));
     // const [token, _setToken] = useState(null);
@@ -23,6 +25,16 @@ export const ContextProvider = ({children}) => {
         setTimeout(()=>{
             _setNotification('');
         }, 5000);
+    }
+
+    const setUser = (user) => {
+        _setUser(user)
+        if (user) {
+            localStorage.setItem('USER', JSON.stringify(user))
+            // localStorage.setItem('USER', user)
+        } else {
+            localStorage.removeItem('USER')
+        }
     }
 
     const setToken = (token) => {

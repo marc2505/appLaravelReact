@@ -9,7 +9,7 @@ export default function DefaultLayout() {
     const {user, token, notification, setUser, setToken} = useStateContext()
 
     if (!token) {
-        return <Navigate to='/home' />
+        return <Navigate to='/' />
     }
 
     const onLogout = (e) => {
@@ -26,13 +26,18 @@ export default function DefaultLayout() {
         .then(({data})=>{
             setUser(data)
         })
+        .then(()=>{
+            // if (user) console.log(user)
+            // console.log(JSON.parse(localStorage.getItem('USER')))
+        })
     }, [])
 
     return (
         <div id='defaultLayout'>
             <aside>
+                <Link to='/'>Home</Link>
                 <Link to='/dashboard'>Dashboard</Link>
-                <Link to='/users'>Users</Link>
+                {/* <Link to='/users'>Users</Link> */}
             </aside>
             <div className="content">
                 <header>

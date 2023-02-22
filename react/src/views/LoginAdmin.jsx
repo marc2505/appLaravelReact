@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import axiosClient from '../axios-client'
 import { useStateContext } from '../contexts/ContextProvider'
 
@@ -14,15 +14,31 @@ export default function LoginAdmin() {
     const [errors, setErrors] = useState(null);
     const {user, token, setUser, setToken} = useStateContext();
 
-    useEffect(()=>{
-        console.log('token=',token);
-        console.log('role=',user.role)
-        if (token && user.role == "admin") {
-            navigate('/admin/dashboard');
-        } else if (!token || user.role != "admin") {
-            navigate('/admin');
-        }
-    },[])
+    // useEffect(()=>{
+    //     if (token && user.role == "admin") {
+    //         navigate('/admin/users');
+    //         // return <Navigate to='/admin/users' />
+    //     } else if (!token || user.role != "admin") {
+    //         navigate('/admin');
+    //         // return <Navigate to='/admin' />
+    //     }
+    // },[token,user])
+
+    // if (!token || user.role != "admin") {
+    //     return <Navigate to='/admin' />
+    // }
+
+    // if (token && user.role == 'admin') {
+    //     return <Navigate to={'/admin/users'} />
+    // }
+
+    // useEffect(()=>{
+
+    // }, [])
+
+    // if (token && user && user.role == 'admin') {
+    //     return <Navigate to='/admin/users' />
+    // }
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -33,9 +49,11 @@ export default function LoginAdmin() {
         setErrors(null)
         axiosClient.post('/loginAdmin', payload)
         .then(({data})=>{
+            // console.log('data=')
+            // console.log(data)
             setUser(data.user)
             setToken(data.token)
-            navigate('/admin/dashboard')
+            navigate('/admin')
         })
         .catch(err=>{
             const response = err.response;
@@ -65,13 +83,13 @@ export default function LoginAdmin() {
                             ))}
                         </div>
                     }
-                    <input ref={emailRef} type='email' placeholder='Email' />
+                    <input ref={emailRef} type='email' placeholder='Email' autoFocus/>
                     <input ref={passwordRef} type='password' placeholder='Password' />
                     <button className="btn btn-block">
                         Login
                     </button>
                 </form>
             </div>
-        </div>    
+        </div>
     )
 }
